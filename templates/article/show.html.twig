@@ -28,20 +28,20 @@
 
         <hr>
 
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {# {% if is_granted('IS_AUTHENTICATED_FULLY') %} #}
             <div class="comment-area mb-5">
                 {{ form(commentForm, { attr: { class: 'comment-form' } }) }}
             </div>
             <hr>
-        {% endif %}
+        {# {% endif %} #}
 
-        <div class="comment-list mt-5" id="comments">
+        {# <div class="comment-list mt-5" id="comments">
             <div class="d-flex justify-content-center">
                 <div class="spinner-border" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
-        </div>
+        </div> #}
     </div>
 
     {# <div class="article-data d-none"
