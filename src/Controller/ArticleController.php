@@ -21,7 +21,9 @@ class ArticleController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        $commentForm = $this->createForm(CommentType::class);
+        $comment = new Comment($article);
+
+        $commentForm = $this->createForm(CommentType::class, $comment);
 
         return $this->renderForm('article/show.html.twig',[
             'article' => $article,

@@ -25,18 +25,18 @@ class CommentType extends AbstractType
                 'label' => 'Envoyer'
             ]);
 
-    //     $builder->get('article')
-    //         ->addModelTransformer(new CallbackTransformer(
-    //             fn (Article $article) => $article->getId(),
-    //             fn (Article $article) => $article->getTitle()));
-    // }
-
-    // public function configureOptions(OptionsResolver $resolver)
-    // {
-    //     $resolver->setDefaults([
-    //         'data_class' => Comment::class,
-    //         'csrf_token_id' => 'comment-add'
-    //     ]);
+         $builder->get('article')
+             ->addModelTransformer(new CallbackTransformer(
+                 fn (Article $article) => $article->getId(),
+                fn (Article $article) => $article->getTitle()));
      }
 
-}
+     public function configureOptions(OptionsResolver $resolver)
+     {
+        $resolver->setDefaults([
+            'data_class' => Comment::class,
+            //  'csrf_token_id' => 'comment-add'
+         ]);
+     }
+
+    }
