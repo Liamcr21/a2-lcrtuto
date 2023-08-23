@@ -18,10 +18,15 @@ class ArticleController extends AbstractController
     public function show(?Article $article, Request $request): Response
     {
         if (!$article) {
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('app_home');
         }
-        return $this->render('article/show.html.twig',[
+
+        $commentForm = $this->createForm(CommentType::class);
+
+        return $this->renderForm('article/show.html.twig',[
             'article' => $article,
+            'commentForm' => $commentForm,
+            
         ]);
     }
 
