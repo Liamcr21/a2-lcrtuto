@@ -35,13 +35,10 @@
             <hr>
         {# {% endif %} #}
 
-        {# <div class="comment-list mt-5" id="comments">
-            <div class="d-flex justify-content-center">
-                <div class="spinner-border" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
-        </div> #}
+        <div class="comment-list mt-5" id="comments">
+            {% for comment in article.comments %}
+            {% include 'comment/index.html.twig' with [comment] %}
+            {% endfor %}
     </div>
 
     {# <div class="article-data d-none"

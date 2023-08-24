@@ -15,8 +15,21 @@ class App{
             return;
         }
     
-        commentForm.addEventListener('submit', async => {
-            console.log(e);
+        commentForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const response = await fetch('/ajax/comments',{
+                method: 'POST',
+                body: new FormData(e.target)
+            });
+
+            if (!response.ok) {
+                return;
+            }
+
+            const json = await response.json();
+
+            console.log(json);
         });
     }
 }
