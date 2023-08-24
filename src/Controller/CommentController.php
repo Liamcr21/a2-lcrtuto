@@ -5,13 +5,17 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class CommentController extends AbstractController
 {
-    #[Route('/comment', name: 'app_comment')]
-    public function index(): Response
+    #[Route('ajax/comments', name: 'comment_add')]
+    public function add(Request $request): Response
     {
-        return $this->render('comment/index.html.twig', [
+
+        $commentData = $request->request->all('comment');
+
+        return $this->render('comment/index', [
             'controller_name' => 'CommentController',
         ]);
     }
