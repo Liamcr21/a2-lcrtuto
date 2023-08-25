@@ -89,7 +89,11 @@ body {
             {% for article in articles|slice(-3) %}
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        <img src="" class="card-img-top" alt="Image de l'article">
+                         {% if article.featuredImage %}
+                <a href="{{ path('article_show', { 'slug': article.slug }) }}">
+                    <img src="/uploads/{{ article.featuredImage.filename }}" alt="{{ article.featuredImage.altText }}" loading="lazy" width="350" height="205" >
+                </a>
+            {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">{{ article.title }}</h5>
                             <p class="card-text"></p>

@@ -46,10 +46,7 @@ class DashboardController extends AbstractDashboardController
 
         if ($this->isGranted('ROLE_ADMIN')) {
 
-        yield MenuItem::subMenu('Comptes', 'fas fa-user')->setSubItems([
-            MenuItem::linkToCrud('Tous les comptes', 'fas fa-user-friends', User::class),
-            MenuItem::linkToCrud('Ajouter', 'fas fa-plus', User::class)->setAction(Crud::PAGE_NEW)
-        ]);
+      
 
         yield MenuItem::subMenu('Articles', 'fas fa-newspaper')->setSubItems([
             MenuItem::linkToCrud('Tous les articles', 'fas fa-newspaper', Article::class),
@@ -60,6 +57,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::subMenu('Comptes', 'fas fa-user')->setSubItems([
             MenuItem::linkToCrud('Tous les comptess', 'fas fa-user-friends', User::class),
             MenuItem::linkToCrud('Ajouter', 'fas fa-plus', User::class)->setAction(Crud::PAGE_NEW),
+        ]);
+
+        yield MenuItem::subMenu('Medias', 'fas fa-photo-video')->setSubItems([
+            MenuItem::linkToCrud('Médiathèque', 'fas fa-photo-video', Media::class),
+            MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Media::class)->setAction(Crud::PAGE_NEW),
         ]);
     }
     }
