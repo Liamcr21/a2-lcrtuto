@@ -37,12 +37,7 @@ class ArticleCrudController extends AbstractCrudController
 
         yield AssociationField::new('featuredImage');
 
-        // yield CollectionField::new('comments')
-        //     ->setEntryType(CommentType::class)
-        //     ->allowAdd(false)
-        //     ->allowDelete(false)
-        //     ->onlyOnForms()
-        //     ->hideWhenCreating();
+ 
 
         yield DateTimeField::new('createdAt');
     }
