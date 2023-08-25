@@ -15,49 +15,163 @@
     <body>
    
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="{{ path('app_home')}}">
+      <img src="votre-logo.png" alt="Logo">
+    </a>
+    <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('app_home')}}">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">Qui suis-je ? </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Tutoriel</a>
+        </li>
+   {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+        <li class="nav-item">
+           <a href="{{ path('app_login')}}" class="btn btn-outline-primary me-2">Se connecter</a>
+       <a href="{{ path('app_register')}}" class="btn btn-primary">S'inscrire</a>
+        </li>
+          {% else %}
+           <div class="dropdown">
+                            <a class="nav-link link-light px-2 dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ app.user.username|capitalize }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="{{ path('app_profile', {username : app.user.username}) }}">Mon profil</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+                                </li>
+                                  {% if is_granted('ROLE_ADMIN') %}
+     <li>
+                                    <a class="dropdown-item" href="{{ path ('admin')}}">Tableau de bord</a>
+                                </li>
+{% endif %}
 
-
-<nav class="py-2 bg-dark border-bottom">
-    <div class="container d-flex flex-wrap">
-            <a class="nav-link text-white" href="{{ path ('admin')}}">Tableau de bord</a>
-          </div>
-    
+                            </ul>
+                        </div>
+                    {% endif %}
+       
+          
+      </ul>
     </div>
+
+  </div>
 </nav>
 
 
-<div class="container">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
 
-        <a href="{{ path('app_home')}}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-            <span class="fs-4">Mon Blog</span>
-        </a>
-
-        <ul class="nav nav-pills">
-        <li class="nav-item">
-                <a href="" class="nav-link">Tuto</a>
-            </li>
-            <li class="nav-item">
-                <a href="" class="nav-link"> S'inscrire</a>
-            </li>
-            <li class="nav-item">
-                <a href="" class="nav-link"> Se connecter</a>
-            </li>
-        </ul>
-
-    </header>
-</div>
    
         {% block body %}{% endblock %}
 
 
-             <div class="container">
-            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-                <div class="col-md-4 d-flex align-items-center">
-                    <span class="copyright">©- {{ 'now'|date('Y') }}LCRTUTO @ Tous droits réservés</span>
-                </div>
-            </footer>
+            <!-- Remove the container if you want to extend the Footer to full width. -->
+<div class="footer">
+  <!-- Footer -->
+  <footer class="text-center text-white" style="background-color: #3f51b5">
+    <!-- Grid container -->
+    <div class="container">
+      <!-- Section: Links -->
+      <section class="mt-5">
+        <!-- Grid row-->
+        <div class="row text-center d-flex justify-content-center pt-5">
+          <!-- Grid column -->
+          <div class="col-md-3">
+            <h6 class="text-uppercase font-weight-bold">
+              <a href="#!" class="text-white">Accueil</a>
+            </h6>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-3">
+            <h6 class="text-uppercase font-weight-bold">
+              <a href="#!" class="text-white">Qui suis-je ?</a>
+            </h6>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-3">
+            <h6 class="text-uppercase font-weight-bold">
+              <a href="#!" class="text-white">Tutoriels</a>
+            </h6>
+          </div>
+          <!-- Grid column -->
+
+         
+          <!-- Grid column -->
         </div>
+        <!-- Grid row-->
+      </section>
+      <!-- Section: Links -->
+
+      <hr class="my-5" />
+
+      <!-- Section: Text -->
+      <section class="mb-5">
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-8">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
+              distinctio earum repellat quaerat voluptatibus placeat nam,
+              commodi optio pariatur est quia magnam eum harum corrupti
+              dicta, aliquam sequi voluptate quas.
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- Section: Text -->
+
+      <!-- Section: Social -->
+      <section class="text-center mb-5">
+        <a href="" class="text-white me-4">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="" class="text-white me-4">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="" class="text-white me-4">
+          <i class="fab fa-google"></i>
+        </a>
+        <a href="" class="text-white me-4">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="" class="text-white me-4">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="" class="text-white me-4">
+          <i class="fab fa-github"></i>
+        </a>
+      </section>
+      <!-- Section: Social -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div
+         class="text-center p-3"
+         style="background-color: rgba(0, 0, 0, 0.2)"
+         >
+      © 2020 Copyright:
+      <a class="text-white" href=""
+         >LCRtuto</a
+        >
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+</div>
+<!-- End of .container -->
     </body>
       <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>

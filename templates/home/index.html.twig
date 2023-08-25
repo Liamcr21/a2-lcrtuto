@@ -3,22 +3,278 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
- <main class="container">
-    <div class="row">
 
-        <div class="col-md-8">
-            <h3 class="pb-4 mb-4 fst-italic border-bottom"> Articles récents</h3>
-             <div id="articles-list">
-                    {% include 'article/list.html.twig' with { articles: articles, leftCol: 5, rightCol: 7 } %}
+
+<style>
+
+body {
+    font-family: "Open Sans", sans-serif;
+    color: #444444;
+}
+
+    .header {
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 100px 0;
+    }
+
+    .features .icon-box {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    transition: ease-in-out 0.3s;
+    box-shadow: 2px 0 35px 0 rgba(68, 88, 144, 0.12);
+}
+
+.features .icon-box i {
+    font-size: 32px;
+    padding-right: 10px;
+    line-height: 1;
+}
+
+.features .icon-box h3 {
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-size: 16px;
+}
+
+.cta {
+    background: linear-gradient(rgba(2, 2, 2, 0.5), rgba(0, 0, 0, 0.8)), url(../img/cta-bg.jpg) center center;
+    background-size: cover;
+    padding: 60px 0;
+}
+
+.cta h3 {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.cta .cta-btn {
+    font-family: "Nunito", sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 8px 28px;
+    border-radius: 25px;
+    transition: 0.5s;
+    margin-top: 10px;
+    border: 2px solid #fff;
+    color: #fff;
+}
+  </style>
+</head>
+<body>
+
+<div class="header" style="background-image: url('{{ asset('images/dev.jpg') }}');">
+  <div class="container">
+    <h1>LCR TUTO</h1>
+    <p>Explorez l'Art du Développement Web Pas à Pas</p>
+    <a href="#" class="btn btn-primary">Tutoriels</a>
+  </div>
+</div>
+
+ <main >
+     <h3 class="pb-4 mb-4 fst-italic border-bottom">Nos derniers tutoriels </h3>
+      <div class="container">
+<div class="col-md-8">
+    <div id="articles-list">
+        <div class="row">
+            {% for article in articles|slice(-3) %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="" class="card-img-top" alt="Image de l'article">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ article.title }}</h5>
+                            <p class="card-text"></p>
+                            <a href="" class="btn btn-primary">Lire plus</a>
+                        </div>
+                    </div>
                 </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+ <a href="" class="btn btn-primary">voir tout</a>
+
+</div>
+
+
+
+<section id="features" class="features">
+      <div class="container">
+     <h3 class="pb-4 mb-4 fst-italic border-bottom">Nos catégories de tutoriels </h3>
+
+        <div class="row">
+          <div class="col-lg-3 col-md-4 col-6 col-6">
+            <div class="icon-box">
+              <i class="ri-store-line" style="color: #ffbb2c;"></i>
+              <h3><a href="">Lorem Ipsum</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6">
+            <div class="icon-box">
+              <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
+              <h3><a href="">Dolor Sitema</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4 mt-md-0">
+            <div class="icon-box">
+              <i class="ri-calendar-todo-line" style="color: #e80368;"></i>
+              <h3><a href="">Sed perspiciatis</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4 mt-lg-0">
+            <div class="icon-box">
+              <i class="ri-paint-brush-line" style="color: #e361ff;"></i>
+              <h3><a href="">Magni Dolores</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4">
+            <div class="icon-box">
+              <i class="ri-database-2-line" style="color: #47aeff;"></i>
+              <h3><a href="">Nemo Enim</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4">
+            <div class="icon-box">
+              <i class="ri-gradienter-line" style="color: #ffa76e;"></i>
+              <h3><a href="">Eiusmod Tempor</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4">
+            <div class="icon-box">
+              <i class="ri-file-list-3-line" style="color: #11dbcf;"></i>
+              <h3><a href="">Midela Teren</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4">
+            <div class="icon-box">
+              <i class="ri-price-tag-2-line" style="color: #4233ff;"></i>
+              <h3><a href="">Pira Neve</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4">
+            <div class="icon-box">
+              <i class="ri-anchor-line" style="color: #b2904f;"></i>
+              <h3><a href="">Dirada Pack</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4">
+            <div class="icon-box">
+              <i class="ri-disc-line" style="color: #b20969;"></i>
+              <h3><a href="">Moton Ideal</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4">
+            <div class="icon-box">
+              <i class="ri-base-station-line" style="color: #ff5828;"></i>
+              <h3><a href="">Verdo Park</a></h3>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-6 mt-4">
+            <div class="icon-box">
+              <i class="ri-fingerprint-line" style="color: #29cc61;"></i>
+              <h3><a href="">Flavor Nivelanda</a></h3>
+            </div>
+          </div>
         </div>
 
-        <div class="col-md-4">
+      </div>
+    </section>
+
+    <section id="cta" class="cta">
+        <div class="text-center">
+          <h3>Call To Action</h3>
+          <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <a class="cta-btn" href="#">Call To Action</a>
+        </div>
+    </section>
+
+    <section id="faq" class="faq">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>F.A.Q</h2>
+          <h3>Frequently Asked <span>Questions</span></h3>
+        </div>
+
+        <div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Les tutoriels sont-ils gratuits ?
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        Oui, tous nos tutoriels sont totalement gratuits. Nous croyons en l'accès à l'apprentissage pour tous.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Puis-je contribuer en soumettant mes propres tutoriels ?
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+         Actuellement, nous ne proposons pas de soumission de tutoriels par les utilisateurs, mais nous apprécions l'intérêt. Restez à l'écoute pour d'éventuelles mises à jour.
+      </div>
+    </div>
+  </div>
+   <div class="accordion-item">
+    <h2 class="accordion-header" id="headinga">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsea" aria-expanded="false" aria-controls="collapsea">
+      Comment sont sélectionnés les sujets de vos tutoriels ?
+      </button>
+    </h2>
+    <div id="collapsea" class="accordion-collapse collapse" aria-labelledby="headinga" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+          Nous choisissons nos sujets de tutoriels en fonction des tendances actuelles du développement web et des demandes fréquentes de nos utilisateurs.
+      </div>
+    </div>
+  </div>
+   <div class="accordion-item">
+    <h2 class="accordion-header" id="headingb">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseb" aria-expanded="false" aria-controls="collapseb">
+        Puis-je utiliser vos tutoriels dans mes projets personnels ?
+      </button>
+    </h2>
+    <div id="collapseb" class="accordion-collapse collapse" aria-labelledby="headingb" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+         Oui, vous êtes libre d'utiliser les connaissances acquises à partir de nos tutoriels dans vos projets personnels ou professionnels.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        Les tutoriels sont-ils adaptés aux débutants ?
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        Oui, nous avons une variété de tutoriels, certains sont conçus spécialement pour les débutants, avec des explications détaillées et des exemples simples.
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+    </section>
+        {# <div class="col-md-4">
             <div class="position-sticky" style="top:2rem;">
 {% include 'widget/about.html.twig' %}
 {% include 'widget/categories.html.twig' %}
             </div>
-        </div>
-    </div>
+        </div> #}
 </main>
 {% endblock %}

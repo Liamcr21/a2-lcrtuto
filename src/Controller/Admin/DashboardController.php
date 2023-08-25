@@ -40,12 +40,22 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToRoute('Aller sur le site', 'fas fa-undo', 'app_home');
+       
+        yield MenuItem::linkToRoute('Revenir sur le site', 'fas fa-undo', 'app_home');
+
+
+        if ($this->isGranted('ROLE_ADMIN')) {
+
+        yield MenuItem::subMenu('Comptes', 'fas fa-user')->setSubItems([
+            MenuItem::linkToCrud('Tous les comptes', 'fas fa-user-friends', User::class),
+            MenuItem::linkToCrud('Ajouter', 'fas fa-plus', User::class)->setAction(Crud::PAGE_NEW)
+        ]);
+
         yield MenuItem::subMenu('Articles', 'fas fa-newspaper')->setSubItems([
             MenuItem::linkToCrud('Tous les articles', 'fas fa-newspaper', Article::class),
             MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Article::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class)
         ]);
-        yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment', Comment::class);
+    }
     }
 }
