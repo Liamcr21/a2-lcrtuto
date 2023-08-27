@@ -31,6 +31,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserArticleView::class)]
+    private Collection $userArticleViews;
+
+    public function __construct()
+    {
+        $this->userArticleViews = new ArrayCollection();
+    }
+
   
    
     public function getId(): ?int
@@ -101,6 +109,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, UserArticleView>
+     */
+    public function getUserArticleViews(): Collection
+    {
+        return $this->userArticleViews;
+    }
+
+    public function addUserArticleView(UserArticleView $userArticleView): static
+    {
+        if (!$this->userArticleViews->contains($userArticleView)) {
+            $this->userArticleViews->add($userArticleView);
+            $userArticleView->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserArticleView(UserArticleView $userArticleView): static
+    {
+        if ($this->userArticleViews->removeElement($userArticleView)) {
+            // set the owning side to null (unless already changed)
+            if ($userArticleView->getUser() === $this) {
+                $userArticleView->setUser(null);
+            }
+        }
+
+        return $this;
     }
 
    

@@ -46,9 +46,13 @@ class Article
     #[ORM\ManyToOne]
     private ?Media $featuredVideo = null;
 
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: UserArticleView::class)]
+    private Collection $userArticleViews;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->userArticleViews = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -177,6 +181,36 @@ class Article
     public function setFeaturedVideo(?Media $featuredVideo): static
     {
         $this->featuredVideo = $featuredVideo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserArticleView>
+     */
+    public function getUserArticleViews(): Collection
+    {
+        return $this->userArticleViews;
+    }
+
+    public function addUserArticleView(UserArticleView $userArticleView): static
+    {
+        if (!$this->userArticleViews->contains($userArticleView)) {
+            $this->userArticleViews->add($userArticleView);
+            $userArticleView->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserArticleView(UserArticleView $userArticleView): static
+    {
+        if ($this->userArticleViews->removeElement($userArticleView)) {
+            // set the owning side to null (unless already changed)
+            if ($userArticleView->getArticle() === $this) {
+                $userArticleView->setArticle(null);
+            }
+        }
 
         return $this;
     }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserArticleViewRepository;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -55,11 +56,18 @@ class UserController extends AbstractController
         throw new \Exception('Don\'t forget to activate logout in security.yaml');
     }
 
-     #[Route('/user/{username}', name: 'app_profile')]
-     public function index(User $user): Response
+    #[Route('/user/{username}', name: 'app_profile')]
+    public function index(User $user, UserArticleViewRepository $userArticleViewRepository): Response
     {
-       return $this->render('user/index.html.twig', [
-             'user' => $user
-         ]);
-     }
+        if ($user !== $this->getUser()) {
+            
+        }
+
+        $recentlyViewedArticles = $userArticleViewRepository->findRecentlyViewedArticles($user);
+
+        return $this->render('user/index.html.twig', [
+            'user' => $user,
+            'recentlyViewedArticles' => $recentlyViewedArticles,
+        ]);
+}
 }
