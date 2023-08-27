@@ -7,7 +7,13 @@ parameters:
     medias_directory: 'public/asset/uploads/'
     uploads_directory: 'uploads/'
 
+# config/services.yaml
+# config/services.yaml
 services:
+    App\Twig\AppExtension:
+        arguments: ['@security.helper']
+        tags: ['twig.extension']
+
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
