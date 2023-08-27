@@ -3,26 +3,103 @@
 {% block title %}{{ user.username|capitalize }}{% endblock %}
 
 {% block body %}
-    <div class="container w-25">
-        <div class="row">
-            <div class="col">
-                <h2>Profil de {{ user.username|capitalize }}</h2>
-                <form>
-                    <div class="col-12">
-                        <label for="username" class="form-label">Nom d'utilisateur</label>
 
-                        <div class="mb-3">
-                            <div class="input-group">
-                                <span class="input-group-text">@</span>
-                                <input type="text" class="form-control" id="username" value="{{ user.username }}" readonly>
-                            </div>
-                        </div>
 
+<section style="">
+    <div class="container py-5">
+   
+      <div class="row">
+        <div class="col-lg-4" style="margin-top:8%">
+          <div class="card mb-4">
+            <div class="card-body text-center" style="background-color: #8C52FF; color:white">
+              <img src="{{ asset('images/icone-user.png') }}" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 150px;">
+              <h3 class="my-3 text-white">{{ user.username|capitalize }}</h3>
+               <p>
+           
+     
+          {% if isUserAdmin() %}
+          <p class="text-muted mb-1"> Vous êtes un administrateur.</p>
+           
+        {% elseif isUserAuthor() %}
+              <p class="text-muted mb-1"> Vous êtes un lecteur.</p>
+        {% endif %}
+    </p>
+                   <p class="text-white">Nombre de tutoriels consultés : {{ recentlyViewedArticles|length }}</p>
+
+              <div class="d-flex justify-content-center mb-2">
+                <a href="{{ path('app_logout') }}" class="btn btn-2">Se déconnecter</a>
+              </div>
+            </div>
+          </div>
+        
+        </div>
+
+
+
+        
+        <div class="col-lg-8">
+            <div class="card mb-4 p-5" style="border:1px solid #8C52FF">
+                <h2>
+                    {% if recentlyViewedArticles|length == 1 %} 
+                    {% else %}
+                        Tutoriels consultés récemment :
+                    {% endif %}
+                </h2>
+                {% if recentlyViewedArticles is empty %}
+                    <p>Aucun tutoriel consulté récemment.</p>
+                {% else %}
+                    <ul class="list-unstyled">
+                        {% set articlesPerPage = 3 %}
+                        {% set pageCount = recentlyViewedArticles|length // articlesPerPage + (recentlyViewedArticles|length % articlesPerPage > 0 ? 1 : 0) %}
+                        {% set currentPage = app.request.query.get('page', 1) %}
+                        {% set startArticle = (currentPage - 1) * articlesPerPage %}
+                        {% set endArticle = startArticle + articlesPerPage - 1 %}
+                        
+                        {% for articleView in recentlyViewedArticles|slice(startArticle, endArticle) %}
+                            <li>
+                                <a class="text-decoration-none" href="{{ path('article_show', { 'slug': articleView.article.slug }) }}">
+                                    <div class="row mt-2 mb-5">
+                                        <div class="col-md-3">
+                                            {% if articleView.article.featuredImage is not null %}
+                                                <img src="{{ asset('uploads/' ~ articleView.article.featuredImage.filename) }}" class="img-article-profile"  alt="Miniature {{ articleView.article.title }}">
+                                            {% else %}
+                                                <img src="{{ asset('images/logo.png') }}"  class="img-article-profile" alt="Logo LCR TUTO">
+                                            {% endif %}
+                                        </div>      
+                                        <div class="col-md-9">
+                                            <div class="d-flex flex-column text-article-profile">
+                                                <h3>{{ articleView.article.title }}</h3>
+                                                <p class="text-normal">(consulté le {{ articleView.viewedAt|date('d/m/Y H:i') }})<br><br>{{ articleView.article.featuredText }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
                     
-
-                    </div>
-                </form>
+                    
+                    <nav class="d-flex justify-content-center" aria-label="Pagination">
+                        <ul class="pagination list-unstyled">
+                            {% for page in 1..pageCount %}
+                                <li class="page-item{% if page == currentPage %} active{% endif %}">
+                                    <a class="page-link text-normal text-decoration-none" href="?page={{ page }}">{{ page }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                {% endif %}
             </div>
         </div>
+
+        
+
+
+       
+        </div>
+      </div>
     </div>
+  </section>
+
 {% endblock %}

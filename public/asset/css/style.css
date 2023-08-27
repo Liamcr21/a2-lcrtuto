@@ -1,3 +1,97 @@
-body{
-    background-color: red;
+@font-face {
+    font-family: 'horta'; 
+    src: url('../font/horta.otf') format('opentype'); 
 }
+
+@font-face {
+    font-family: 'tomorrow'; 
+    src: url('../font/tomorrow.ttf') format('truetype');; 
+}
+.btn-1{
+    background-color: #8C52FF;
+    color: white;
+    font-family: 'tomorrow' , sans-serif; 
+}
+
+.btn-1:hover{
+    border: 1px solid #8C52FF;
+    background-color: white;
+    color: #8C52FF;
+}
+
+
+.btn-2{
+    border: 1px solid white;
+    background-color: #8C52FF;
+    color: white;
+    font-family: 'tomorrow' , sans-serif; 
+}
+
+.btn-2:hover{
+    border: 1px solid white;
+    background-color: white;
+    color: #8C52FF;
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: 'horta' , sans-serif; 
+    font-weight: bold; 
+}
+
+a,p,span{
+    font-family: 'tomorrow' , sans-serif; 
+    color: black;
+
+}
+
+.text-normal{
+    font-size: 16px;
+}
+
+.active>.page-link, .page-link.active{
+    background-color: #8C52FF !important;
+    color: white;
+}
+
+.page-link{
+    color: black;
+}
+
+.img-article-profile{
+    height: 150px;
+}
+
+.footer{
+    background-color: #8C52FF;
+}
+
+.bg-nav{
+    background-color: #8C52FF;
+    color: white;
+}
+
+.nav-item, .dropdown{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.nav-link{
+    color: white;
+}
+
+.nav-link:hover{
+    color: white;
+    border-bottom: 1px solid white;
+}
+
+
+@media (max-width: 768px) {
+    .img-article-profile{
+        height: 350px;
+        width: 430px;
+    }
+
+    .text-article-profile{
+        margin-top: 2%;
+    }
+    
+  }

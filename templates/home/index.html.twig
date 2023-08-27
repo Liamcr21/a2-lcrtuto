@@ -91,13 +91,13 @@ body {
                     <div class="card">
                          {% if article.featuredImage %}
                 <a href="{{ path('article_show', { 'slug': article.slug }) }}">
-                    <img src="/uploads/{{ article.featuredImage.filename }}" alt="{{ article.featuredImage.altText }}" loading="lazy" width="350" height="205" >
+                    <img src="asset/uploads/{{ article.featuredImage.filename }}" alt="{{ article.featuredImage.altText }}" loading="lazy" width="350" height="205" >
                 </a>
             {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">{{ article.title }}</h5>
                             <p class="card-text"></p>
-                            <a href="" class="btn btn-primary">Lire plus</a>
+                            <a href="{{ path('article_show', { 'slug': article.slug }) }}" class="btn btn-primary">Lire plus</a>
                         </div>
                     </div>
                 </div>
